@@ -54,9 +54,20 @@ jobs:
         call .\msvc420\bin\VCVARS32.BAT x86
         mkdir Release
         .\msvc420\bin\NMAKE.EXE /f isle.mak CFG="ISLE - Win32 Release"
+    
+    - name: Calculate progress
+      run: |
+        stat --printf="%s" Release/LEGO1.DLL > size.txt
       
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
         name: Win32
         path: Release
+    
+    - name: Upload Artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: Win32
+        path: size.txt
+
